@@ -15,6 +15,8 @@ const QString TXT_DESINSCRIRE_CONFIRMATION = QString::fromUtf8("Êtes-vous certa
 const QString TXT_ATTENTION = QString::fromUtf8("Attention!");
 const QString TXT_NAS_INEXISTANT = QString::fromUtf8("Numéro inexistant!");
 const QString TXT_PERSONNE_ABSENTE = QString::fromUtf8("Désolé, le numéro %1 n'est pas dans la liste électorale.");
+const QString TXT_ERREUR_INSCRIPTION = QString::fromUtf8("Erreur d'inscription!");
+const QString TXT_PERSONNE_PRESENTE = QString::fromUtf8("Une personne avec ce numéro existe déjà dans la liste");
 
 ControleurDeListeElectorale::ControleurDeListeElectorale(QWidget *parent)
     : QMainWindow(parent)
@@ -59,6 +61,10 @@ void ControleurDeListeElectorale::initialiserFenetrePrincipale()
 {
 	desinscripteur = new DesinscrireElecteur;
 	desinscripteur->hide();
+
+	inscripteurElecteur = new CreerElecteur;
+	inscripteurElecteur->hide();
+
 	std::string titre = "Circonscription: " + circonscription->reqNomCirconscription();
 	setWindowTitle(QString::fromStdString(titre));
 
@@ -160,8 +166,20 @@ void ControleurDeListeElectorale::quitter()
 
 void ControleurDeListeElectorale::creerNouvelElecteur()
 {
-	// TODO implémenter
-	std::cerr << "Nouvel électeur\n";
+	inscripteurElecteur->show();
+	if (inscripteurElecteur->exec() == QDialog::Accepted)
+	{
+		try
+		{
+		    circonscription->inscrire( *inscripteurElecteur->reqElecteur() );
+		}
+		catch(PersonneDejaPresenteException& e)
+		{
+			QMessageBox::information(this, TXT_ERREUR_INSCRIPTION, TXT_PERSONNE_PRESENTE);
+		}
+	}
+	afficheur->rafraichir(circonscription);
+	inscripteurElecteur->hide();
 }
 
 void ControleurDeListeElectorale::creerNouveauCandidat()
