@@ -127,7 +127,7 @@ bool estUnNom(const string& p_ligne);
 // Validation d'une ligne individuelle pour un format donné
 
 bool validerNas(const string& p_nas);  // **** POUR CORRECTION: LIGNE 410 ****
-bool validerCodePostal(const std::string& p_code);
+
 bool validerProvinceOuTerritoire(const std::string& p_province);
 bool validerDate(const string& p_ligne);
 

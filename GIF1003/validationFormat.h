@@ -30,6 +30,7 @@ const std::string PARTIS_POLITIQUES_FEDERAUX[NB_PARTIS]
 
 bool estUneLigneVide(const std::string& p_ligne);
 bool validerNas(const std::string& p_nas);
+bool validerCodePostal(const std::string& p_code);
 bool validerFormatFichier(std::istream& p_is);
 bool estUnNom(const std::string& p_ligne);
 bool estUnPartiPolitique(const std::string& p_ligne);
