@@ -98,7 +98,6 @@ bool Circonscription::pointeurEstNul(Personne* p)
 	return p == nullptr ;
 }
 
-
 /****************************************************************************//**
  * Détecte la présence d'une personne dans la liste électorale
  *
@@ -132,7 +131,10 @@ bool Circonscription::validerVecteurDesInscrits() const
 	}
 	else
 	{
-		valide = std::none_of(m_vInscrits.cbegin(), m_vInscrits.cend(), pointeurEstNul);
+		for (auto it = m_vInscrits.begin(); valide and it != m_vInscrits.end(); ++it)
+		{
+			valide = !pointeurEstNul(*it);
+		}
 	}
 	return valide ;
 }

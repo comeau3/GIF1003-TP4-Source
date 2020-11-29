@@ -39,7 +39,7 @@ private:
 
 	void verifieInvariant() const ;
 
-	std::vector<Personne*>::iterator localiserNas(std::string& p_nas) const;
+	bool nasEstPresentDansIntervalle(const std::string& p_nas, std::vector<Personne*>::iterator p_debut);
 	bool personneEstDejaPresente(const std::string& p_nas) const;
 
 public:

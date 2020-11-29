@@ -155,8 +155,7 @@ void ControleurDeListeElectorale::recuperer()
 
 void ControleurDeListeElectorale::quitter()
 {
-	// TODO implémenter
-	std::cerr << "Quitter\n";
+	close();
 }
 
 void ControleurDeListeElectorale::creerNouvelElecteur()
