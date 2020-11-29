@@ -2,15 +2,15 @@
 #include "PersonneException.h"
 #include <iostream>
 
-const QString TXT_MENU_FICHIER = QString::fromUtf8("Fichier");
-const QString TXT_MENU_ACTIONS = QString::fromUtf8("Actions");
-const QString TXT_NOUVEAU_ACTION = QString::fromUtf8("Nouvelle circonscription");
-const QString TXT_SAUVEGARDER_ACTION = QString::fromUtf8("Sauvegarder");
-const QString TXT_RECUPERER_ACTION = QString::fromUtf8("Récupérer");
-const QString TXT_QUITTER_ACTION = QString::fromUtf8("Quitter");
-const QString TXT_NOUVELECTEUR_ACTION = QString::fromUtf8("Nouvel électeur");
-const QString TXT_NOUVCANDIDAT_ACTION = QString::fromUtf8("Nouveau candidat");
-const QString TXT_DESINSCRIRE_ACTION = QString::fromUtf8("Désinscrire");
+const QString TXT_MENU_FICHIER = QString::fromUtf8("&Fichier");
+const QString TXT_MENU_ACTIONS = QString::fromUtf8("&Opérations");
+const QString TXT_NOUVEAU_ACTION = QString::fromUtf8("&Nouvelle circonscription");
+const QString TXT_SAUVEGARDER_ACTION = QString::fromUtf8("&Sauvegarder");
+const QString TXT_RECUPERER_ACTION = QString::fromUtf8("&Récupérer");
+const QString TXT_QUITTER_ACTION = QString::fromUtf8("&Quitter");
+const QString TXT_NOUVELECTEUR_ACTION = QString::fromUtf8("Nouvel &électeur");
+const QString TXT_NOUVCANDIDAT_ACTION = QString::fromUtf8("Nouveau &candidat");
+const QString TXT_DESINSCRIRE_ACTION = QString::fromUtf8("&Désinscrire");
 const QString TXT_DESINSCRIRE_CONFIRMATION = QString::fromUtf8("Êtes-vous certain de vouloir désinscrire cet électeur? Cette action est irréversible!");
 const QString TXT_ATTENTION = QString::fromUtf8("Attention!");
 const QString TXT_NAS_INEXISTANT = QString::fromUtf8("Numéro inexistant!");
@@ -40,8 +40,8 @@ void ControleurDeListeElectorale::initialiserCirconscription()
 
 void ControleurDeListeElectorale::initialiserBarreDeMenu()
 {
+	initialiserMenuFichier();
     initialiserMenuActions();
-    initialiserMenuFichier();
 }
 
 void ControleurDeListeElectorale::initialiserAfficheur()
