@@ -65,6 +65,9 @@ void ControleurDeListeElectorale::initialiserFenetrePrincipale()
 	inscripteurElecteur = new CreerElecteur;
 	inscripteurElecteur->hide();
 
+	inscripteurCandidat = new CreerCandidat;
+	inscripteurCandidat->hide();
+
 	std::string titre = "Circonscription: " + circonscription->reqNomCirconscription();
 	setWindowTitle(QString::fromStdString(titre));
 
@@ -184,8 +187,21 @@ void ControleurDeListeElectorale::creerNouvelElecteur()
 
 void ControleurDeListeElectorale::creerNouveauCandidat()
 {
-    // TODO implémenter
-	std::cerr << "Nouveau candidat\n";
+	inscripteurCandidat->show();
+	if (inscripteurCandidat->exec() == QDialog::Accepted)
+	{
+		try
+		{
+		    circonscription->inscrire( *inscripteurCandidat->reqCandidat() );
+		}
+		catch(PersonneDejaPresenteException& e)
+		{
+			QMessageBox::information(this, TXT_ERREUR_INSCRIPTION, TXT_PERSONNE_PRESENTE);
+		}
+	}
+	afficheur->rafraichir(circonscription);
+	inscripteurCandidat->hide();
+
 }
 
 void ControleurDeListeElectorale::desinscrire()

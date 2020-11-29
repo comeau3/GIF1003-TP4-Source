@@ -1,0 +1,4 @@
+Nettoyer l'affichage des caractères dans afficheur  (utf8, wtf?)
+Mettre des messages d'erreur ou ok (rouge vs vert) à droite des input dans les creer
+Implémenter creercandidat avec le polymorphisme et l'héritage
+Implémenter création, sauvegarde et récupération (GROS travail)

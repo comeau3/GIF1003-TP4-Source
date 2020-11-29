@@ -7,6 +7,7 @@
 #include "afficheurdelisteelectorale.h"
 #include "desinscrireelecteur.h"
 #include "creerelecteur.h"
+#include "creercandidat.h"
 #include "Circonscription.h"
 #include "Electeur.h"
 #include "Candidat.h"
@@ -50,6 +51,7 @@ private:
     AfficheurDeListeElectorale* afficheur;
     DesinscrireElecteur* desinscripteur;
     CreerElecteur* inscripteurElecteur;
+    CreerCandidat* inscripteurCandidat;
 
 
 
