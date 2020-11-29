@@ -52,7 +52,7 @@ QPushButton* AfficheurDeListeElectorale::reqBoutonCreerNouveauCandidat()
 void AfficheurDeListeElectorale::rafraichir(const elections::Circonscription* circonscription)
 {
     liste->clear();
-    liste->setPlainText(QString::fromStdString(circonscription->reqCirconscriptionFormate()));
+    liste->setPlainText(convertirTexte(circonscription->reqCirconscriptionFormate()));
 }
 
 AfficheurDeListeElectorale::~AfficheurDeListeElectorale()
