@@ -347,11 +347,17 @@ std::string Circonscription::reqCirconscriptionFormate() const
 
 Circonscription::~Circonscription()
 {
-	while ( !m_vInscrits.empty() )
-	{
-		delete m_vInscrits.back() ;
-		m_vInscrits.pop_back();
-	}
+	for (auto it = m_vInscrits.begin(); it != m_vInscrits.end(); ++it) delete (*it);
+
+	/* TODO À effacer
+	 *
+	 * while ( !m_vInscrits.empty() )
+	 * {
+	 *	   delete m_vInscrits.back() ;
+	 *	   m_vInscrits.pop_back();
+	 * }
+	 *
+	 */
 }
 
 } /* namespace elections */
