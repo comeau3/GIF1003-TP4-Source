@@ -34,7 +34,7 @@ private slots:
 private:
     //Ui::ControleurDeListeElectoraleClass ui;
 
-    elections::Circonscription* circonscription;
+    elections::Circonscription* circonscription = nullptr;
 
     QMenu* menuFichier;
     QMenu* menuActions;

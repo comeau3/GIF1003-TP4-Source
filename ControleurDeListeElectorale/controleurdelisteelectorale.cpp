@@ -96,8 +96,11 @@ void ControleurDeListeElectorale::initialiserMenuFichier()
 	menuFichier = menuBar()->addMenu(TXT_MENU_FICHIER);
 
 	actionNouveau = new QAction(TXT_NOUVEAU_ACTION, this);
+	actionNouveau->setEnabled(false);
 	actionSauvegarder = new QAction(TXT_SAUVEGARDER_ACTION, this);
+	actionSauvegarder->setEnabled(false);
 	actionRecuperer = new QAction(TXT_RECUPERER_ACTION, this);
+	actionRecuperer->setEnabled(false);
 	actionQuitter = new QAction(TXT_QUITTER_ACTION, this);
 
 	connect(actionNouveau, SIGNAL(triggered()), this, SLOT(nouveau()));
@@ -231,5 +234,5 @@ void ControleurDeListeElectorale::desinscrire()
 
 ControleurDeListeElectorale::~ControleurDeListeElectorale()
 {
-
+    delete circonscription;
 }

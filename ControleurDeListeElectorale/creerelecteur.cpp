@@ -294,6 +294,7 @@ void CreerElecteur::clicBoutonSoumettre()
 	const util::Adresse adr(numCivic, nomRue, ville, codePostal, province);
 
 	electeur = new elections::Electeur(nas, nom, prenom, ddn, adr);
+	actualiser(Initial);
 	accept();
 
 }
@@ -301,7 +302,7 @@ void CreerElecteur::clicBoutonSoumettre()
 void CreerElecteur::clicBoutonAnnuler()
 {
     // TODO implémenter: Efface la fenêtre.  Demande si l'utilisateur est certain.
-
+    actualiser(Initial);
 	close();
 }
 
@@ -325,7 +326,7 @@ elections::Electeur* CreerElecteur::reqElecteur()
 
 CreerElecteur::~CreerElecteur()
 {
-
+    delete electeur;
 }
 
 

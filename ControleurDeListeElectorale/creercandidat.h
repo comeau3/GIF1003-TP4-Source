@@ -28,7 +28,7 @@ private:
 
     // Source de données
 
-    elections::Candidat* candidat;
+    elections::Candidat* candidat = nullptr;
 
 
     Mode modeCourant;

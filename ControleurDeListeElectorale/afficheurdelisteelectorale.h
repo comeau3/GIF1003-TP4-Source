@@ -20,7 +20,7 @@ public:
     QPushButton* reqBoutonCreerNouveauCandidat();
 
 public slots:
-    void rafraichir(const elections::Circonscription*);
+    void rafraichir(const elections::Circonscription* circonscription);
 
 private:
 
@@ -32,11 +32,6 @@ private:
     QHBoxLayout* zoneBouton;
     QVBoxLayout* zoneGlobale;
 
-
-    //QLineEdit*   ligneRecherche;
-    //QPushButton* boutonRecherche;
-
-    //Ui::afficheurDeListeElectoraleClass ui;
 };
 
 #endif // AFFICHEURDELISTEELECTORALE_H

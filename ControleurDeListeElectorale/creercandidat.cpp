@@ -303,22 +303,19 @@ void CreerCandidat::clicBoutonSoumettre()
 	const util::Adresse adr(numCivic, nomRue, ville, codePostal, province);
 
 	candidat = new elections::Candidat(nas, nom, prenom, ddn, adr, parti);
+	actualiser(Initial);
 	accept();
 
 }
 
 void CreerCandidat::clicBoutonAnnuler()
 {
-    // TODO implémenter: Efface la fenêtre.  Demande si l'utilisateur est certain.
-
+    actualiser(Initial);
 	close();
 }
 
 void CreerCandidat::clicBoutonReInitialiser()
 {
-	// TODO implémenter: ramène tous les champs à leur valeur initiale. Demande si certain.
-	// TODO Remet le formulaire au mode Initial
-
 	actualiser(Initial);
 }
 
@@ -334,7 +331,7 @@ elections::Candidat* CreerCandidat::reqCandidat()
 
 CreerCandidat::~CreerCandidat()
 {
-
+    delete candidat;
 }
 
 
