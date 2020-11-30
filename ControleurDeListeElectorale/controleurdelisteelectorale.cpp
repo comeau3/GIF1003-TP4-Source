@@ -70,6 +70,7 @@ void ControleurDeListeElectorale::initialiserFenetrePrincipale()
 
 	std::string titre = "Circonscription: " + circonscription->reqNomCirconscription();
 	setWindowTitle(QString::fromStdString(titre));
+	setMinimumSize(400, 600);
 
 }
 

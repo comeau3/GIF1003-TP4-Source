@@ -59,9 +59,20 @@ private:
     QLineEdit* codePostalSaisie;
     QComboBox* provinceSaisie;
 
+    QLabel* nomValidation;
+    QLabel* prenomValidation;
+    QLabel* nasValidation;
+    QLabel* ddnValidation;
+    QLabel* numeroCiviqueValidation;
+    QLabel* nomRueValidation;
+    QLabel* villeValidation;
+    QLabel* codePostalValidation;
+    QLabel* provinceValidation;
+
     QHBoxLayout* zoneBoutons;
     QVBoxLayout* zoneSaisies;
     QVBoxLayout* zoneBannieres;
+    QVBoxLayout* zoneValidations;
 
     QHBoxLayout* zoneSuperieure;
     QGridLayout* zoneGlobale;
@@ -70,6 +81,8 @@ private:
 
     void actualiserBoutons();
     void actualiserSaisies();
+    void actualiserMessageDeValidation(QLabel*, bool);
+    void actualiserValidations();
     void actualiser(Mode mode);
 
     /* Validation des saisies */
@@ -86,6 +99,7 @@ private:
     void initialiserBoutons();
     void initialiserBannieres();
     void initialiserZonesDeSaisie();
+    void initialiserZonesDeValidation();
     void miseEnPageDuFormulaire();
 
 

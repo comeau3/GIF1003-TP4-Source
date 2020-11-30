@@ -1,5 +1,6 @@
 #include "creerelecteur.h"
 #include "validationFormat.h"
+#include <iostream>
 
 const QString TXT_SOUMETTRE     = QString::fromUtf8("&Soumettre");
 const QString TXT_ANNULER       = QString::fromUtf8("&Annuler");
@@ -23,6 +24,9 @@ const QString TXT_NOMRUE_PHOLDER 		= QString::fromUtf8("Nom de rue");
 const QString TXT_VILLE_PHOLDER 		= QString::fromUtf8("Ville");
 const QString TXT_CODEPOSTAL_PHOLDER 	= QString::fromUtf8("A1A 1A1");
 
+const QString TXT_VALIDE                = QString::fromUtf8("Valide");
+const QString TXT_NON_VALIDE            = QString::fromUtf8("Non valide");
+
 const QString TXT_CREER_ELECTEUR = QString::fromUtf8("Créer un nouvel électeur");
 
 // TODO Permettre l'édition d'un électeur existant avec le même QDialog (pointeur nullptr en argument: créer, sinon modifier)
@@ -35,6 +39,7 @@ CreerElecteur::CreerElecteur(QWidget *parent)
 	initialiserBoutons();
 	initialiserBannieres();
 	initialiserZonesDeSaisie();
+	initialiserZonesDeValidation();
 
 	miseEnPageDuFormulaire();
 
@@ -161,11 +166,45 @@ void CreerElecteur::initialiserZonesDeSaisie()
 
 }
 
+void CreerElecteur::initialiserZonesDeValidation()
+{
+	nomValidation = new QLabel(TXT_NON_VALIDE);
+	nomValidation->setStyleSheet("color: red");
+	prenomValidation = new QLabel(TXT_NON_VALIDE);
+	prenomValidation->setStyleSheet("color: red");
+	nasValidation = new QLabel(TXT_NON_VALIDE);
+	nasValidation->setStyleSheet("color: red");
+	ddnValidation = new QLabel(TXT_VALIDE);
+	ddnValidation->setStyleSheet("color: green");
+	numeroCiviqueValidation = new QLabel(TXT_NON_VALIDE);
+	numeroCiviqueValidation->setStyleSheet("color: red");
+	nomRueValidation = new QLabel(TXT_NON_VALIDE);
+	nomRueValidation->setStyleSheet("color: red");
+	villeValidation = new QLabel(TXT_NON_VALIDE);
+	villeValidation->setStyleSheet("color: red");
+	codePostalValidation = new QLabel(TXT_NON_VALIDE);
+	codePostalValidation->setStyleSheet("color: red");
+	provinceValidation = new QLabel(TXT_VALIDE);
+	provinceValidation->setStyleSheet("color:green");
+
+	zoneValidations = new QVBoxLayout;
+	zoneValidations->addWidget(nomValidation);
+	zoneValidations->addWidget(prenomValidation);
+	zoneValidations->addWidget(nasValidation);
+	zoneValidations->addWidget(ddnValidation);
+	zoneValidations->addWidget(numeroCiviqueValidation);
+	zoneValidations->addWidget(nomRueValidation);
+	zoneValidations->addWidget(villeValidation);
+	zoneValidations->addWidget(codePostalValidation);
+	zoneValidations->addWidget(provinceValidation);
+}
+
 void CreerElecteur::miseEnPageDuFormulaire()
 {
 	zoneSuperieure = new QHBoxLayout;
 	zoneSuperieure->addLayout(zoneBannieres);
 	zoneSuperieure->addLayout(zoneSaisies);
+	zoneSuperieure->addLayout(zoneValidations);
 
 	zoneGlobale = new QGridLayout;
 	zoneGlobale->addLayout(zoneSuperieure, 0, 0);
@@ -223,6 +262,25 @@ void CreerElecteur::actualiserSaisies()
 	}
 }
 
+void CreerElecteur::actualiserMessageDeValidation(QLabel* validation, bool valeur)
+{
+	validation->setStyleSheet(valeur ? "color: green" : "color: red");
+	validation->setText(valeur ? TXT_VALIDE : TXT_NON_VALIDE);
+}
+
+void CreerElecteur::actualiserValidations()
+{
+	// ddn et province seront toujours considérés valides
+
+    actualiserMessageDeValidation(nomValidation, laSaisieNomEstValide());
+    actualiserMessageDeValidation(prenomValidation, laSaisiePrenomEstValide());
+    actualiserMessageDeValidation(nasValidation, laSaisieNasEstValide());
+    actualiserMessageDeValidation(numeroCiviqueValidation, util::estUnEntierPositif(numeroCiviqueSaisie->text().toStdString()));
+    actualiserMessageDeValidation(nomRueValidation, util::estUnNom(nomRueSaisie->text().toStdString()));
+    actualiserMessageDeValidation(villeValidation, util::estUnNom(villeSaisie->text().toStdString()));
+    actualiserMessageDeValidation(codePostalValidation, util::validerCodePostal(codePostalSaisie->text().toStdString()));
+}
+
 bool CreerElecteur::laSaisieNomEstValide()
 {
 	QString texte = nomSaisie->text();
@@ -270,6 +328,7 @@ void CreerElecteur::actualiser(Mode mode)
 	modeCourant = mode;
 	actualiserBoutons();
 	actualiserSaisies();
+	actualiserValidations();
 
 }
 
