@@ -6,23 +6,25 @@
 
 class CreerPersonne : public QDialog
 {
-	enum Mode {Pret, EnCours, Initial};
+
 
     Q_OBJECT
 
 public:
+	enum Mode {Pret, EnCours, Initial};
+
     CreerPersonne(QWidget *parent = 0);
-    ~CreerPersonne();
+    virtual ~CreerPersonne();
 
     virtual elections::Personne* reqPersonne() = 0; // Cette méthode permet à l'appelant de récupérer l'objet créé
 
-private slots:
+public slots:
     void clicBoutonSoumettre();
     void clicBoutonAnnuler();
     void clicBoutonReInitialiser();
     void formulaireModifie();
 
-private:
+public:
 
     Mode modeCourant;
 

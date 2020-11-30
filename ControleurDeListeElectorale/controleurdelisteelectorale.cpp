@@ -178,7 +178,9 @@ void ControleurDeListeElectorale::creerNouvelElecteur()
 	{
 		try
 		{
-		    circonscription->inscrire( *inscripteurElecteur->reqElecteur() );
+			auto p = inscripteurElecteur->reqPersonne();
+		    circonscription->inscrire( *p );
+		    delete p;
 		}
 		catch(PersonneDejaPresenteException& e)
 		{
@@ -196,7 +198,9 @@ void ControleurDeListeElectorale::creerNouveauCandidat()
 	{
 		try
 		{
-		    circonscription->inscrire( *inscripteurCandidat->reqCandidat() );
+			auto p = inscripteurCandidat->reqPersonne();
+		    circonscription->inscrire( *p );
+		    delete p;
 		}
 		catch(PersonneDejaPresenteException& e)
 		{

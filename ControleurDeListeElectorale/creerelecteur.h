@@ -2,104 +2,17 @@
 #define CREERELECTEUR_H
 
 #include <QtGui>
+#include "creerpersonne.h"
 #include "Electeur.h"
 
-class CreerElecteur : public QDialog
+class CreerElecteur : public CreerPersonne
 {
-	enum Mode {Pret, EnCours, Initial};
-
-    Q_OBJECT
-
 public:
-    CreerElecteur(QWidget *parent = 0);
-    ~CreerElecteur();
+	CreerElecteur(QWidget *parent = 0);
+	~CreerElecteur();
 
-    elections::Electeur* reqElecteur(); // Cette méthode permet à l'appelant de récupérer l'objet créé
-
-private slots:
-    void clicBoutonSoumettre();
-    void clicBoutonAnnuler();
-    void clicBoutonReInitialiser();
-    void formulaireModifie();
-
-private:
-
-    // Source de données
-
-    elections::Electeur* electeur = nullptr;
-
-
-    Mode modeCourant;
-
-    /* Widgets du formulaire */
-
-    QPushButton* boutonSoumettre;
-    QPushButton* boutonAnnuler;
-    QPushButton* boutonReInitialiser;
-
-    QLabel* nomBanniere;
-    QLabel* prenomBanniere;
-    QLabel* nasBanniere;
-    QLabel* ddnBanniere;
-    QLabel* numeroCiviqueBanniere;
-    QLabel* nomRueBanniere;
-    QLabel* villeBanniere;
-    QLabel* codePostalBanniere;
-    QLabel* provinceBanniere;
-
-    QLineEdit* nomSaisie;
-    QLineEdit* prenomSaisie;
-    QLineEdit* nasSaisie;
-    QDateEdit* ddnSaisie;
-    QLineEdit* numeroCiviqueSaisie;
-    QLineEdit* nomRueSaisie;
-    QLineEdit* villeSaisie;
-    QLineEdit* codePostalSaisie;
-    QComboBox* provinceSaisie;
-
-    QLabel* nomValidation;
-    QLabel* prenomValidation;
-    QLabel* nasValidation;
-    QLabel* ddnValidation;
-    QLabel* numeroCiviqueValidation;
-    QLabel* nomRueValidation;
-    QLabel* villeValidation;
-    QLabel* codePostalValidation;
-    QLabel* provinceValidation;
-
-    QHBoxLayout* zoneBoutons;
-    QVBoxLayout* zoneSaisies;
-    QVBoxLayout* zoneBannieres;
-    QVBoxLayout* zoneValidations;
-
-    QHBoxLayout* zoneSuperieure;
-    QGridLayout* zoneGlobale;
-
-    /* Méthode de changement de mode */
-
-    void actualiserBoutons();
-    void actualiserSaisies();
-    void actualiserMessageDeValidation(QLabel*, bool);
-    void actualiserValidations();
-    void actualiser(Mode mode);
-
-    /* Validation des saisies */
-
-    bool lesSaisiesSontToutesValides();
-    bool laSaisieNomEstValide();
-    bool laSaisiePrenomEstValide();
-    bool laSaisieNasEstValide();
-    bool laSaisieDateEstValide();
-    bool laSaisieAdresseEstValide();
-
-    /* État initial */
-
-    void initialiserBoutons();
-    void initialiserBannieres();
-    void initialiserZonesDeSaisie();
-    void initialiserZonesDeValidation();
-    void miseEnPageDuFormulaire();
-
+	elections::Personne* reqPersonne();
 };
 
-#endif // CREERELECTEUR_H
+
+#endif
