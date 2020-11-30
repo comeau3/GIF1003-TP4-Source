@@ -1,10 +1,12 @@
 #include "creercandidat.h"
 #include "validationFormat.h"
+#include "afficheurdelisteelectorale.h"
 #include "Candidat.h"
 
 
-const QString TXT_PARTI_BANNIERE        = QString::fromUtf8("Parti politique:");
+const QString TXT_PARTI_BANNIERE = QString::fromUtf8("Parti politique:");
 const QString TXT_CREER_CANDIDAT = QString::fromUtf8("Créer un candidat");
+const QString TXT_VALIDE         = QString::fromUtf8("Valide");
 
 CreerCandidat::CreerCandidat(QWidget *parent) : CreerPersonne(parent)
 {
@@ -17,9 +19,14 @@ CreerCandidat::CreerCandidat(QWidget *parent) : CreerPersonne(parent)
 	partiSaisie = new QComboBox;
 	for (std::size_t numero = 0; numero < util::NB_PARTIS; numero++)
 	{
-		partiSaisie->addItem(QString::fromStdString(util::PARTIS_POLITIQUES_FEDERAUX[numero]));
+		partiSaisie->addItem(AfficheurDeListeElectorale::convertirTexte(util::PARTIS_POLITIQUES_FEDERAUX[numero]));
 	}
+	partiSaisie->setCurrentIndex(elections::BLOC_QUEBECOIS);
 	zoneSaisies->addWidget(partiSaisie);
+
+	partiValidation = new QLabel(TXT_VALIDE);
+	partiValidation->setStyleSheet("color: green");
+	zoneValidations->addWidget(partiValidation);
 
 	connect( partiSaisie, SIGNAL( currentIndexChanged(const QString&) ), this, SLOT( formulaireModifie()));
 	setWindowTitle(TXT_CREER_CANDIDAT);

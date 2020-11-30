@@ -279,6 +279,22 @@ void CreerPersonne::actualiserValidations()
     actualiserMessageDeValidation(codePostalValidation, util::validerCodePostal(codePostalSaisie->text().toStdString()));
 }
 
+void CreerPersonne::actualiserValeursAcceptees()
+{
+   switch(modeCourant)
+   {
+   case Pret:
+	   break;
+   case EnCours:
+	   break;
+   case Initial:
+	   jourAccepte = ddnSaisie->date().day();
+	   moisAccepte = ddnSaisie->date().month();
+	   anneeAcceptee = ddnSaisie->date().year();
+	   provinceAcceptee = provinceSaisie->currentText().toStdString();
+   }
+}
+
 bool CreerPersonne::laSaisieNomEstValide()
 {
 	QString texte = nomSaisie->text();

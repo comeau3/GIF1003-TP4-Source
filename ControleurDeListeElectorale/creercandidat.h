@@ -26,6 +26,7 @@ public:
 
     QLabel* partiBanniere;
     QComboBox* partiSaisie;
+    QLabel* partiValidation;
 
 
 };

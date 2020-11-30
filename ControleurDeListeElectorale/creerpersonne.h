@@ -92,6 +92,7 @@ public:
     void actualiserSaisies();
     void actualiserMessageDeValidation(QLabel*, bool);
     void actualiserValidations();
+    void actualiserValeursAcceptees();
     void actualiser(Mode mode);
 
     /* Validation des saisies */
