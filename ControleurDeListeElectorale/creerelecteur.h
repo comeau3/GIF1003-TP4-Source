@@ -4,8 +4,6 @@
 #include <QtGui>
 #include "Electeur.h"
 
-//#include "ui_creerelecteur.h"
-
 class CreerElecteur : public QDialog
 {
 	enum Mode {Pret, EnCours, Initial};
@@ -102,9 +100,6 @@ private:
     void initialiserZonesDeValidation();
     void miseEnPageDuFormulaire();
 
-
-
-    //Ui::CreerElecteurClass ui;
 };
 
 #endif // CREERELECTEUR_H

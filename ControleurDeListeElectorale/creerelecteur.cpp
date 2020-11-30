@@ -44,8 +44,6 @@ CreerElecteur::CreerElecteur(QWidget *parent)
 	miseEnPageDuFormulaire();
 
 	actualiser(Initial);
-
-	//ui.setupUi(this);
 }
 
 void CreerElecteur::initialiserBoutons()
