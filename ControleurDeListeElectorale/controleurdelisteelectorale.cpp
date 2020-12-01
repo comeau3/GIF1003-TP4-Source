@@ -176,16 +176,17 @@ void ControleurDeListeElectorale::creerNouvelElecteur()
 	inscripteurElecteur->show();
 	if (inscripteurElecteur->exec() == QDialog::Accepted)
 	{
+		elections::Personne* p = nullptr;
 		try
 		{
-			auto p = inscripteurElecteur->reqPersonne();
+			p = inscripteurElecteur->reqPersonne();
 		    circonscription->inscrire( *p );
-		    delete p;
 		}
 		catch(PersonneDejaPresenteException& e)
 		{
 			QMessageBox::information(this, TXT_ERREUR_INSCRIPTION, TXT_PERSONNE_PRESENTE);
 		}
+		delete p;
 	}
 	afficheur->rafraichir(circonscription);
 	inscripteurElecteur->hide();
@@ -196,16 +197,17 @@ void ControleurDeListeElectorale::creerNouveauCandidat()
 	inscripteurCandidat->show();
 	if (inscripteurCandidat->exec() == QDialog::Accepted)
 	{
+		elections::Personne* p = nullptr;
 		try
 		{
-			auto p = inscripteurCandidat->reqPersonne();
+			p = inscripteurCandidat->reqPersonne();
 		    circonscription->inscrire( *p );
-		    delete p;
 		}
 		catch(PersonneDejaPresenteException& e)
 		{
 			QMessageBox::information(this, TXT_ERREUR_INSCRIPTION, TXT_PERSONNE_PRESENTE);
 		}
+		delete p;
 	}
 	afficheur->rafraichir(circonscription);
 	inscripteurCandidat->hide();
