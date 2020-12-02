@@ -24,8 +24,8 @@ const QString TXT_NOMRUE_PHOLDER 		= QString::fromUtf8("Nom de rue");
 const QString TXT_VILLE_PHOLDER 		= QString::fromUtf8("Ville");
 const QString TXT_CODEPOSTAL_PHOLDER 	= QString::fromUtf8("A1A 1A1");
 
-const QString TXT_VALIDE                = QString::fromUtf8("Valide");
-const QString TXT_NON_VALIDE            = QString::fromUtf8("Non valide");
+const QString TXT_VALIDE                = QString::fromUtf8("    valide");
+const QString TXT_NON_VALIDE            = QString::fromUtf8("non-valide");
 
 const QString TXT_CREER_ELECTEUR = QString::fromUtf8("Créer un nouvel électeur");
 

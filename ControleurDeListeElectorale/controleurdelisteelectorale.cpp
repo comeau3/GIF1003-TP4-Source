@@ -18,6 +18,12 @@ const QString TXT_PERSONNE_ABSENTE = QString::fromUtf8("Désolé, le numéro %1 
 const QString TXT_ERREUR_INSCRIPTION = QString::fromUtf8("Erreur d'inscription!");
 const QString TXT_PERSONNE_PRESENTE = QString::fromUtf8("Une personne avec ce numéro existe déjà dans la liste");
 
+// Classe ControleurDeListeElectorale
+// Fenêtre principale de notre programme de gestion de liste électorale.
+// Son rôle est de coordonner l'affichage de la liste, par un widget AfficheurDeListeElectorale qui est le central widget
+// Et permettre l'inscription ainsi que la désinscription d'électeurs sur la liste.
+
+
 ControleurDeListeElectorale::ControleurDeListeElectorale(QWidget *parent)
     : QMainWindow(parent)
 {
@@ -26,9 +32,6 @@ ControleurDeListeElectorale::ControleurDeListeElectorale(QWidget *parent)
 	initialiserBarreDeMenu();
 	initialiserAfficheur();
 	initialiserFenetrePrincipale();
-
-
-	//ui.setupUi(this);
 }
 
 void ControleurDeListeElectorale::initialiserCirconscription()
@@ -53,8 +56,6 @@ void ControleurDeListeElectorale::initialiserAfficheur()
 	connect(afficheur->reqBoutonDesinscrire(), SIGNAL(clicked()), this, SLOT(desinscrire()));
 
 	setCentralWidget(afficheur);
-
-
 }
 
 void ControleurDeListeElectorale::initialiserFenetrePrincipale()

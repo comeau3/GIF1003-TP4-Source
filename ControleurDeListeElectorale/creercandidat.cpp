@@ -34,7 +34,6 @@ CreerCandidat::CreerCandidat(QWidget *parent) : CreerPersonne(parent)
 
 void CreerCandidat::actualiserSaisies()
 {
-	// TODO Implémenter
 
 	switch(modeCourant) {
 	case EnCours:
