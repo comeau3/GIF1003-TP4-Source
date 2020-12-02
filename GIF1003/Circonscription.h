@@ -30,6 +30,14 @@ namespace elections {
 
 class Circonscription {
 
+public:
+
+	/************************************************************************//**
+	 * \type Iterateur_t Un itérateur à une entrée du vector de la liste électorale
+	 *//************************************************************************/
+
+	typedef std::vector<Personne*>::const_iterator Iterateur_t;
+
 private:
 
 
@@ -40,6 +48,8 @@ private:
 	void verifieInvariant() const ;
 
 	bool nasEstPresentDansIntervalle(const std::string& p_nas, std::vector<Personne*>::iterator p_debut);
+
+	Iterateur_t trouver(const std::string&) const;
 	bool personneEstDejaPresente(const std::string& p_nas) const;
 
 public:

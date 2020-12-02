@@ -107,12 +107,32 @@ bool Circonscription::pointeurEstNul(Personne* p)
 
 bool Circonscription::personneEstDejaPresente(const std::string& p_nas) const
 {
-	bool presente = false;
-	for (auto it = m_vInscrits.begin(); !presente and it != m_vInscrits.end(); ++it)
+	return trouver(p_nas) != m_vInscrits.end();
+}
+
+/****************************************************************************//**
+ * Localise un nas donné dans la liste électorale.
+ *
+ * \param[in] p_nas le numéro d'assurance sociale à localiser, au format 888 888 888
+ *
+ * \return un itérateur à l'inscription contenant le nas cherché.  m_vInscrits.end()
+ * si le nas cherché est absent de la liste.
+ *
+ *//*****************************************************************************/
+
+Circonscription::Iterateur_t Circonscription::trouver(const std::string& p_nas) const
+{
+	Iterateur_t iter = m_vInscrits.begin();
+	bool trouve = false;
+
+	while ( (!trouve) and (iter != m_vInscrits.end()) )
 	{
-		if ((*it)->reqNas() == p_nas) presente = true;
+		if ( (*iter)->reqNas() == p_nas )
+			trouve = true;
+		else
+			++iter;
 	}
-	return presente;
+   return iter;
 }
 
 /****************************************************************************//**
@@ -242,22 +262,20 @@ void Circonscription::inscrire(const Personne& p_nouveau)
 
 void Circonscription::desinscrire(const std::string& p_nas)
 {
-	std::vector<Personne*>::size_type precedent = m_vInscrits.size();
+	size_t precedent = m_vInscrits.size();
 	PRECONDITION(util::validerNas(p_nas));
 
-	bool localise = false;
-	for (auto it = m_vInscrits.begin(); (!localise) and (it != m_vInscrits.end()); ++it)
+	Iterateur_t localise = trouver(p_nas);
+	if (localise == m_vInscrits.end())
 	{
-		if ((*it)->reqNas() == p_nas )
-		{
-			delete *it;
-			m_vInscrits.erase(it);
-			localise = true;
-		}
+		throw PersonneAbsenteException(p_nas);
 	}
-	if (!localise) throw PersonneAbsenteException(p_nas);
+	else
+	{
+		m_vInscrits.erase(localise);
+	}
 
-	POSTCONDITION(m_vInscrits.size() + 1 == precedent);
+	POSTCONDITION(m_vInscrits.size() == (precedent - 1) );
 	INVARIANTS();
 }
 
