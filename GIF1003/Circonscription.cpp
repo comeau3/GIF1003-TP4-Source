@@ -234,12 +234,8 @@ void Circonscription::inscrire(const Personne& p_nouveau)
 	PRECONDITION(p_nouveau.valider()) ;
 
 	if (personneEstDejaPresente(p_nouveau.reqNas()))
-	{
-		throw(PersonneDejaPresenteException(p_nouveau.reqNas()));
-	}
-
-	Personne* copieNouveau = p_nouveau.clone() ;
-	m_vInscrits.push_back(copieNouveau) ;
+		throw (PersonneDejaPresenteException(p_nouveau.reqNas()));
+	m_vInscrits.push_back(p_nouveau.clone()) ;
 
 	INVARIANTS() ;
 
@@ -249,6 +245,9 @@ void Circonscription::inscrire(const Personne& p_nouveau)
 
 /****************************************************************************//**
  * Retire une inscription de la liste électorale
+ *
+ * Fait deux actions: désalloue le pointeur à la personne inscrite.  Efface ce
+ * pointeur de la liste.
  *
  * \param[in] p_nas Numéro d'assurance sociale de la personne à retirer
  *
@@ -266,14 +265,11 @@ void Circonscription::desinscrire(const std::string& p_nas)
 	PRECONDITION(util::validerNas(p_nas));
 
 	Iterateur_t localise = trouver(p_nas);
-	if (localise == m_vInscrits.end())
-	{
-		throw PersonneAbsenteException(p_nas);
-	}
-	else
-	{
-		m_vInscrits.erase(localise);
-	}
+
+	if (localise == m_vInscrits.end()) throw PersonneAbsenteException(p_nas);
+	delete *localise;
+	m_vInscrits.erase(localise);
+
 
 	POSTCONDITION(m_vInscrits.size() == (precedent - 1) );
 	INVARIANTS();
@@ -365,17 +361,8 @@ std::string Circonscription::reqCirconscriptionFormate() const
 
 Circonscription::~Circonscription()
 {
-	for (auto it = m_vInscrits.begin(); it != m_vInscrits.end(); ++it) delete (*it);
-
-	/* TODO À effacer
-	 *
-	 * while ( !m_vInscrits.empty() )
-	 * {
-	 *	   delete m_vInscrits.back() ;
-	 *	   m_vInscrits.pop_back();
-	 * }
-	 *
-	 */
+	for (auto it = m_vInscrits.begin(); it != m_vInscrits.end(); ++it)
+		delete (*it);
 }
 
 } /* namespace elections */

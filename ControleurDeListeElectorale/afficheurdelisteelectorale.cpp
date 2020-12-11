@@ -18,6 +18,7 @@ AfficheurDeListeElectorale::AfficheurDeListeElectorale(elections::Circonscriptio
 	elections::Circonscription* circonscription = circ;
 
 	liste = new QPlainTextEdit(convertirTexte(circonscription->reqCirconscriptionFormate()));
+	liste->setReadOnly(true);
 	boutonNouvelElecteur = new QPushButton(TXT_BOUTON_ELECTEUR);
 	boutonNouveauCandidat = new QPushButton(TXT_BOUTON_CANDIDAT);
 	boutonDesinscrire = new QPushButton(TXT_BOUTON_DESINSCRIRE);
